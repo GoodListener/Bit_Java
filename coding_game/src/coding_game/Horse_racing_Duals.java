@@ -19,7 +19,7 @@ class Horse_racing_Duals {
       int pi = in.nextInt();
       if (9 == (pi / Math.pow(10, 7))) {
           }
-            
+            //test
       }
       
     }
