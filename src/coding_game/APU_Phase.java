@@ -16,14 +16,9 @@ public class APU_Phase {
     
     for (int i = 0; i < height; i++) {
       String line = in.nextLine(); // width characters, each either 0 or .
-      
-      // 2차원 배열
-      // width 가로
-      // height 세로
-      // 00
-      // 0.
+      phase[i] = line.toCharArray();
       for(int j = 0; j < width; j++) {
-        phase[i] = line.toCharArray();
+
         if(phase[i][j] == '0'){
           answer[i] = (i + " " + j);
         }
