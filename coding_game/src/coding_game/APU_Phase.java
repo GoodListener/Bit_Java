@@ -14,15 +14,15 @@ public class APU_Phase {
     for (int i = 0; i < height; i++) {
       if (i==0) {
         String line = "00.0";
-        \n000."; 
+        //\n000."; 
       }
       else if (i==1) {
-        String line = "0.00";.0.0
+     //   String line = "0.00";.0.0
       }
       else if (i==2) {
         String line = ".0.0";
       }
-      phase[i] = line.toCharArray();
+     // phase[i] = line.toCharArray();
     }
     System.out.println(phase[0]);
     
