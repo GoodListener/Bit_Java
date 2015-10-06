@@ -2,6 +2,22 @@
 0, 0 부터 시작
 
 0, ~width 탐색
+재귀호출로
+int s[0][0] = 0;
+
+find(w, h);
+
+find (int w, int h) {
+   for (i = 0~height)
+      for (j = 0~width)
+         if 끝(i == height)
+            return "-1 -1"
+         
+         if s[i][j] == 0
+            find(w, h+1)
+         if s[i][j] == 1
+            return "i j" + find(w, h+1)
+         
 
 1. 있으면 (i, j) = 현재 위치 "i j"
 
@@ -11,4 +27,4 @@
 3. 1,2를 완료하면 height를 탐색
    (next_i, j)를 발견하면 "next_i j"하고 
 
-4. (i, next_j)부터 시작 반복 
+4. (i, next_j)부터 시작 반복
