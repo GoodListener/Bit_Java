@@ -12,7 +12,7 @@ find (int w, int h) {
       for (j = 0~width)
          if 끝(i == height)
             return "-1 -1"
-         
+          
          if s[i][j] == 0
             find(w, h+1)
          if s[i][j] == 1
