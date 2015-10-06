@@ -1,8 +1,7 @@
-
+﻿
 0, 0 부터 시작
 
 0, ~width 탐색
-재귀호출로
 int s[0][0] = 0;
 
 find(w, h);
@@ -28,3 +27,17 @@ find (int w, int h) {
    (next_i, j)를 발견하면 "next_i j"하고 
 
 4. (i, next_j)부터 시작 반복
+
+한점을 검사할 때 
+확인해야 하는 것
+1. o and check==0 인가 답에 씀
+2. o and check==1 인가 답에 씀
+3. x and check==0 and width의 중간.. 넘어감
+4. x and check==1 and width의 중간.. 넘어감
+5. x and check==0 and width의 끝 다음줄로
+6. x and check==1 and width의 끝 "-1 -1"
+
+
+xox
+oxo
+xox
