@@ -11,7 +11,7 @@ public class APU_Phase {
     int height = in.nextInt(); // the number of cells on the Y axis
     in.nextLine();
 
-    char[][] phase = new char[width][height];
+    char[][] phase = new char[height][width];
     String[] answer = new String[height];
 
 
@@ -24,7 +24,7 @@ public class APU_Phase {
     int check = 0;
     int ver = 0;
 
-    for(int i = 0; i <height; i++) {
+    for(int i = 0; i <height; i++) { // height보다 적을 때 0 넣어주는것
 
       for(int j = 0; j < width; j++) {
         if (phase[i][j] == '0' && check == 0) {
@@ -44,27 +44,33 @@ public class APU_Phase {
         else if (phase[i][j]== '.' && check == 1 && j < width-1) {
         }
 
-        else if (phase[i][j]=='.' && check == 0 && j == width-1) {
+        else if (phase[i][j]=='.' && check == 0 && j == width-1) {   
         }
-
         else if (phase[i][j] == '.' && check == 1 && j == width-1) {
           answer[i] = (answer[i] + " -1 -1");
           check++;
         }
         if(check == 2) {
           for (int k = i; k < height ; k++) {
-            if(phase[k][ver] == '0' && k < height-1) {
+            if(phase[k][ver] == '0' && k < height-1 && check == 2) {
               answer[i] = (answer[i] + " " + ver + " " + k);
+              check++;
             }
-            else if(phase[k][ver] == '.' && k == height-1) {
+            else if(phase[k][ver] == '.' && k == height-1 && check == 2) {
               answer[i] = (answer[i] + " -1 -1");
+              check++;
             }
           }
         }//세로줄
       }//j 루프
       check = 0;
-      
-      System.out.print(answer[i]);
     }
+    
+    
+    //정답라인
+    for(int i = 0; i <height; i++) {
+      System.out.println(answer[i]);
+    }
+    
   }
 }
