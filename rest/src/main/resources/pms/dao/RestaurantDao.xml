@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pms.dao.RestaurantDao">
+
+  <resultMap type="restaurant" id="restaurantMap">
+    <id column="no" property="no"/>
+  </resultMap>
+
+  <select id="selectList" resultMap="restaurantMap" parameterType="map">
+    select 
+      no,
+      name,
+      photo,
+      rank,
+      location,
+      star 
+    from restaurant
+    order by 
+    <choose>
+      <when test="keyword == 'name'">name </when>
+      <when test="keyword == 'star'">star </when>
+      <otherwise>no </otherwise>
+    </choose>
+    <choose>
+      <when test="align == 'asc'">asc</when>
+      <otherwise>desc</otherwise>
+    </choose>
+    limit #{startIndex}, #{length}
+  </select>
+  
+   <insert id="insert" parameterType="restaurant">
+    insert into restaurant(name,content,location,photo) 
+    values(#{name},#{content},#{location},#{photo})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from restaurant 
+    where no=#{no}
+  </delete>
+  
+  <update id="update" parameterType="restaurant">
+    update restaurant set 
+      name=#{name},
+      content=#{content},
+      photo=#{photo},
+      location=#{location},
+      star=#{star}
+    where no=#{no}
+  </update>
+  
+  <select id="selectOne" resultMap="restaurantMap" parameterType="int">
+    select 
+      no,
+      name,
+      content,
+      photo,
+      rank,
+      location,
+      star 
+    from restaurant
+    where no=#{no}
+  </select>
+</mapper>
