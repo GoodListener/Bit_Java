@@ -63,4 +63,16 @@
     from restaurant
     where no=#{no}
   </select>
+  
+  <select id="searchList" resultMap="restaurantMap" parameterType="String">
+    select 
+      no,
+      name,
+      photo,
+      rank,
+      location,
+      star 
+    from restaurant
+    where content like concat('%',#{word},'%')
+   </select>
 </mapper>

@@ -33,6 +33,14 @@
   <td>${restaurant.rank}</td>
 </tr> 
 <tr>
+  <th>별점</th>
+  <td>
+<c:forEach begin="1" end="${restaurant.star}"> 
+  <img src="../file/star.png">
+</c:forEach>
+  </td>
+</tr> 
+<tr>
   <th>내용</th>
   <td><textarea rows='10' name='content' 
       cols='60' readonly="readonly">${restaurant.content}</textarea></td>
@@ -44,6 +52,7 @@
       src='../file/${restaurant.photo}'><br>
   </td>
 </tr>
+
 </table>
 <p>
 <a href='update.do?no=${restaurant.no}'><button type="button">수정</button></a>

@@ -28,7 +28,7 @@
     <th>위치</th>
     <th>별점</th>
   </tr>
-<c:forEach var="restaurant" items="${restaurants}">
+<c:forEach var="restaurant" items="${findRestaurants}">
   <tr>
     <td>${restaurant.no}</td>
     <td>${restaurant.photo}</td>

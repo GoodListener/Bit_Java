@@ -125,4 +125,15 @@ public class RestaurantController {
     return "redirect:list.do";
   }
   
+  @RequestMapping("search")
+  public String search(
+      String word,
+      HttpServletRequest request) throws Exception {
+    
+    List<Restaurant> findRestaurants = restaurantDao.searchList(word);
+
+    request.setAttribute("findRestaurants", findRestaurants);
+    return "restaurant/FindRestaurantList";
+  }
+  
 }
