@@ -6,6 +6,7 @@ import java.util.Map;
 import pms.domain.Restaurant;
 
 public interface RestaurantDao {
+  public List<Restaurant> selectAll();
   public List<Restaurant> selectList(Map<String, Object> paramMap);
   public int insert(Restaurant restaurant);
   public int delete(int no);
@@ -14,5 +15,6 @@ public interface RestaurantDao {
   public List<Restaurant> searchList(Map<String, Object> paramMap);
   public int plusStar(Restaurant restaurant);
   public void updateStar();
+  public void updateRank(Restaurant restaurant);
 }
 

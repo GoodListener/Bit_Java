@@ -8,30 +8,45 @@
   <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
-<h1>새 맛집 등록</h1>
+  <jsp:include page="/Header.jsp" />
+  
 <form action='add.do' method='post' enctype="multipart/form-data">
-<a href='list.do'>목록</a>
-<table class="type01">
+
+<table style="margin-left: auto; margin-right: auto; border-style: none">
+
+ <tr>
+   <td style="align:left;">
+      <p><a class="button" href='list.do'>List</a></p>
+   </td>
+   <td style="align:left;">
+      <p><button type='submit' class="button">Add</button></p>
+   </td>
+  </tr>
+      
+</table>
+<table style="margin-left: auto; margin-right: auto;">
+  <tr>
+    <td style="text-align:left;font-size:30px;font-weight:bold;">새 맛집 등록</td>
+  </tr>
 <tr>
-  <th>맛집 이름</th>
+  <th bgcolor="#FAED7D">맛집 이름</th>
   <td><input type='text' name='name' placeholder="제목을 넣으세요."></td>
 </tr>
 <tr>
-  <th>사진</th>
+  <th bgcolor="#FAED7D">사진</th>
   <td><input type='file' name='file'></td>
 </tr>
 <tr>
-  <th>내용</th>
+  <th bgcolor="#FAED7D">내용</th>
   <td><textarea rows='10' name='content' cols='60'
        placeholder="내용을 입력하세요."></textarea></td>
 </tr>
 <tr>
-  <th>장소</th>
+  <th bgcolor="#FAED7D">장소</th>
   <td><input type='text' name='location'></td>
 </tr>
 </table>
 
-<p><button type='submit'>등록</button></p>
 
 </form>
 </body>

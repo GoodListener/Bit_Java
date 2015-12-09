@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pms.dao.RestaurantDao;
 import pms.domain.Restaurant;
 import pms.util.MultipartHelper;
+import pms.util.RankHelper;
 
 @Controller
 @RequestMapping("/restaurant/*")
@@ -31,25 +32,25 @@ public class RestaurantController {
   public String list(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="10") int pageSize,
-      @RequestParam(defaultValue="no") String keyword,
+      @RequestParam(defaultValue="floatstar") String keyword,
       @RequestParam(defaultValue="desc") String align,
       Restaurant restaurant,
       HttpServletRequest request, HttpServletResponse response) 
           throws Exception {
-
-    restaurant.setCalcstar(calcStar(restaurant.getStar(), restaurant.getCountstar()));
+    
+    RankHelper.setRank(RankHelper.getRank(restaurantDao.selectAll()), restaurantDao);
     
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (pageNo - 1) * pageSize);
     paramMap.put("length", pageSize);
     paramMap.put("keyword", keyword);
     paramMap.put("align", align);
-    paramMap.put("calcstar", restaurant.getCalcstar());
+    
     
     restaurantDao.updateStar();
     List<Restaurant> restaurants = restaurantDao.selectList(paramMap);
+    
     request.setAttribute("restaurants", restaurants);
-
     return "restaurant/RestaurantList";
   }
   
@@ -133,7 +134,7 @@ public class RestaurantController {
   public String search(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="10") int pageSize,
-      @RequestParam(defaultValue="no") String keyword,
+      @RequestParam(defaultValue="floatstar") String keyword,
       @RequestParam(defaultValue="desc") String align,
       String word,
       HttpServletRequest request) throws Exception {
@@ -161,12 +162,6 @@ public class RestaurantController {
       return "restaurant/RestaurantAuthError";
     } 
     return "redirect:list.do";
-  }
-  private int calcStar(int star, int countstar) {
-    if (countstar == 0) {
-     return 0; 
-    }
-    return star / countstar;
   }
 
   

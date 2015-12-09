@@ -12,32 +12,36 @@
   <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
-
-<h1>맛집 리스트</h1>
-<a href='add.do'>새 글</a><br>
+  <jsp:include page="/Header.jsp" />
 <form action="search.do" method="POST">
-<div style="text-align: right;"><input type="text" name="word">
-<button>검색</button>
+<div style="text-align: right;">
+  <table style="margin-left: auto; margin-right: auto" class="type01">
+  <a class="button" href='add.do'>New</a>
+  <button class="button">Search</button><input type="text" name="word">
+  </table>
 </div>
 </form>
-<table class="type01">
+  <table style="margin-left: auto; margin-right: auto; border-style: none">
+    <tr>
+      <td style="text-align:left;font-size:30px;font-weight:bold;">맛집 리스트</td>
+    </tr>
+ </table>
+<table style="margin-left: auto; margin-right: auto" class="type01">
   <tr>
-    <th>번호</th>
-    <th>사진</th>
-    <th>맛집 이름</th>
-    <th>순위</th>
-    <th>위치</th>
-    <th>별점</th>
+    <th bgcolor="#FAED7D">순위</th>
+    <th bgcolor="#FAED7D">사진</th>
+    <th bgcolor="#FAED7D">맛집 이름</th>
+    <th bgcolor="#FAED7D">위치</th>
+    <th bgcolor="#FAED7D">평가</th>
   </tr>
 <c:forEach var="restaurant" items="${restaurants}">
 
 			<tr>
-				<td>${restaurant.no}</td>
+				<td>${restaurant.rank}</td>
 				<td><img width="60" height="60"
 					src='../file/${(empty restaurant.photo)?"default.png":restaurant.photo}'>
 			  </td>
 				<td><a href="detail.do?no=${restaurant.no}">${restaurant.name}</a></td>
-				<td>${restaurant.rank}</td>
 				<td>${restaurant.location}</td>
 				<td class="starSize"><c:forEach begin="1"
 						end="${restaurant.calcstar}">
@@ -56,11 +60,15 @@
 <p>
 <c:choose>
 <c:when test="${empty param.pageNo}">
-<a href='list.do?pageNo=2'><button type="button">다음 페이지 이동</button></a>
+<div align="center">
+<a class="button2" href='list.do?pageNo=2'>next</a>
+</div>
 </c:when>
 <c:otherwise>
-<a href='list.do?pageNo=${(param.pageNo < 2)?"1":param.pageNo - 1}'><button type="button">이전 페이지 이동</button></a>
-<a href='list.do?pageNo=${(param.pageNo < 1)?"2":param.pageNo + 1}'><button type="button">다음 페이지 이동</button></a>
+<div align="center">
+<a class="button2" href='list.do?pageNo=${(param.pageNo < 2)?"1":param.pageNo - 1}'>before</a>
+<a class="button2" href='list.do?pageNo=${(param.pageNo < 1)?"2":param.pageNo + 1}'>next</a>
+</div>
 </c:otherwise>
 </c:choose>
 </p>

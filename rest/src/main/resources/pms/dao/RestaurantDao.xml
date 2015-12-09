@@ -9,6 +9,20 @@
     <id column="no" property="no"/>
   </resultMap>
 
+  <select id="selectAll" resultMap="restaurantMap">
+    select 
+      no,
+      name,
+      photo,
+      rank,
+      location,
+      star,
+      calcstar,
+      countstar,
+      floatstar
+    from restaurant
+  </select>
+
   <select id="selectList" resultMap="restaurantMap" parameterType="map">
     select 
       no,
@@ -23,9 +37,8 @@
     order by 
     <choose>
       <when test="keyword == 'name'">name </when>
-      <when test="keyword == 'star'">star </when>
-      <when test="keyword == 'floatstar'">floatstar </when>
-      <otherwise>no </otherwise>
+      <when test="keyword == 'no'">no </when>
+      <otherwise>floatstar </otherwise>
     </choose>
     <choose>
       <when test="align == 'asc'">asc</when>
@@ -80,12 +93,19 @@
       calcstar,
       floatstar
     from restaurant
-    where content like concat('%',#{word},'%')
+    where 
+    <choose>
+      <when test="keyword == 'name'">name </when>
+      <when test="keyword == 'no'">no </when>
+      <otherwise>floatstar </otherwise>
+    </choose>
+    like concat('%',#{word},'%')
     order by 
     <choose>
       <when test="keyword == 'name'">name </when>
-      <when test="keyword == 'star'">star </when>
-      <otherwise>no </otherwise>
+      <when test="keyword == 'floatstar'">floatstar </when>
+      <when test="keyword == 'no'">no </when>
+      <otherwise>rank </otherwise>
     </choose>
     <choose>
       <when test="align == 'asc'">asc</when>
@@ -107,5 +127,12 @@
     calcstar=star/countstar,
     floatstar = star/countstar
   </update>
+  
+  <update id="updateRank" parameterType="restaurant">
+    update restaurant set
+    rank = #{rank}
+    where no=#{no}
+  </update>
+  
   
 </mapper>
