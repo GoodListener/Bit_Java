@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,18 +30,29 @@
     <th>별점</th>
   </tr>
 <c:forEach var="restaurant" items="${restaurants}">
-  <tr>
-    <td>${restaurant.no}</td>
-    <td>${restaurant.photo}</td>
-    <td><a href="detail.do?no=${restaurant.no}">${restaurant.name}</a></td>
-    <td>${restaurant.rank}</td>
-    <td>${restaurant.location}</td>
-    <td>${restaurant.star}</td>
-  </tr>
-</c:forEach>  
 
+			<tr>
+				<td>${restaurant.no}</td>
+				<td><img width="60" height="60"
+					src='../file/${(empty restaurant.photo)?"default.png":restaurant.photo}'>
+			  </td>
+				<td><a href="detail.do?no=${restaurant.no}">${restaurant.name}</a></td>
+				<td>${restaurant.rank}</td>
+				<td>${restaurant.location}</td>
+				<td class="starSize"><c:forEach begin="1"
+						end="${restaurant.calcstar}">
+						<img src="../file/star.png">
+					</c:forEach> 
+					<c:choose>
+						<c:when test="${(restaurant.floatstar==0)}"></c:when>
+						<c:otherwise>
+							<fmt:formatNumber value="${restaurant.floatstar}" pattern="0.0" />
+						</c:otherwise>
+					</c:choose>
+					</td>
+			</tr>
+		</c:forEach>  
 </table>
-
 <p>
 <c:choose>
 <c:when test="${empty param.pageNo}">
@@ -56,8 +68,3 @@
 
 </html>
 
-
-
-
-
-    

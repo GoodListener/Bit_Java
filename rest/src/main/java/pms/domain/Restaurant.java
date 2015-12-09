@@ -9,7 +9,9 @@ public class Restaurant {
   protected String location;
   protected int star;
   protected String photo;
-  
+  protected int countstar;
+  protected int calcstar;
+  protected float floatstar;
   
   
   @Override
@@ -58,6 +60,24 @@ public class Restaurant {
   }
   public void setPhoto(String photo) {
     this.photo = photo;
+  }
+  public int getCountstar() {
+    return countstar;
+  }
+  public void setCountstar(int countstar) {
+    this.countstar = countstar;
+  }
+  public int getCalcstar() {
+    return calcstar;
+  }
+  public void setCalcstar(int calcstar) {
+    this.calcstar = calcstar;
+  }
+  public float getFloatstar() {
+    return floatstar;
+  }
+  public void setFloatstar(float floatstar) {
+    this.floatstar = floatstar;
   }
   
   

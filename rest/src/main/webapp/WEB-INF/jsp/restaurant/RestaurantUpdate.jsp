@@ -35,14 +35,6 @@
   <td><input type='text' name='location' value='${restaurant.location}'></td>
 </tr>
 <tr>
-  <th>순위</th>
-  <td>${restaurant.rank}</td>
-</tr> 
-<tr>
-  <th>별점</th>
-  <td><input type="number" name='star' value='${restaurant.star }' max="5" min="0"></td>
-</tr> 
-<tr>
   <th>내용</th>
   <td><textarea rows='10' name='content' 
       cols='60'>${restaurant.content}</textarea></td>

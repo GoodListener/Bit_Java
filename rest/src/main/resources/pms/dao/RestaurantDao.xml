@@ -16,12 +16,15 @@
       photo,
       rank,
       location,
-      star 
+      star,
+      calcstar,
+      floatstar
     from restaurant
     order by 
     <choose>
       <when test="keyword == 'name'">name </when>
       <when test="keyword == 'star'">star </when>
+      <when test="keyword == 'floatstar'">floatstar </when>
       <otherwise>no </otherwise>
     </choose>
     <choose>
@@ -46,8 +49,7 @@
       name=#{name},
       content=#{content},
       photo=#{photo},
-      location=#{location},
-      star=#{star}
+      location=#{location}
     where no=#{no}
   </update>
   
@@ -59,20 +61,51 @@
       photo,
       rank,
       location,
-      star 
+      star,
+      countstar,
+      calcstar,
+      floatstar
     from restaurant
     where no=#{no}
   </select>
   
-  <select id="searchList" resultMap="restaurantMap" parameterType="String">
+  <select id="searchList" resultMap="restaurantMap" parameterType="map">
     select 
       no,
       name,
       photo,
       rank,
       location,
-      star 
+      star,
+      calcstar,
+      floatstar
     from restaurant
     where content like concat('%',#{word},'%')
+    order by 
+    <choose>
+      <when test="keyword == 'name'">name </when>
+      <when test="keyword == 'star'">star </when>
+      <otherwise>no </otherwise>
+    </choose>
+    <choose>
+      <when test="align == 'asc'">asc</when>
+      <otherwise>desc</otherwise>
+    </choose>
+    limit #{startIndex}, #{length}
    </select>
+   
+   <update id="plusStar" parameterType="restaurant">
+    update restaurant set 
+      star=star+#{star},
+      countstar = #{countstar} + 1
+    where no=#{no}
+  </update>
+   
+   
+   <update id="updateStar">
+    update restaurant set 
+    calcstar=star/countstar,
+    floatstar = star/countstar
+  </update>
+  
 </mapper>

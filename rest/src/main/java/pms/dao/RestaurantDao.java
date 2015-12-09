@@ -11,6 +11,8 @@ public interface RestaurantDao {
   public int delete(int no);
   public int update(Restaurant restaurant);
   public Restaurant selectOne(int no);
-  public List<Restaurant> searchList(String word);
+  public List<Restaurant> searchList(Map<String, Object> paramMap);
+  public int plusStar(Restaurant restaurant);
+  public void updateStar();
 }
 

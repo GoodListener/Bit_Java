@@ -27,20 +27,21 @@
 
 table.type01 {
     border-collapse: collapse;
-    text-align: left;
+    text-align: center;
     line-height: 1.5;
     margin : 20px 10px;
 }
 table.type01 th {
     width: 150px;
-    padding: 10px;
+    padding: 3px;
     font-weight: bold;
-    vertical-align: top;
+    vertical-align: middle;
     border: 1px solid #ccc;
 }
 table.type01 td {
-    width: 350px;
-    padding: 10px;
-    vertical-align: top;
+    width: 150px;
+    height: 50px;
+    padding: 3px;
+    vertical-align: middle;
     border: 1px solid #ccc;
 }

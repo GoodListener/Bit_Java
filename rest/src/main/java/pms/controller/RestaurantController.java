@@ -33,17 +33,21 @@ public class RestaurantController {
       @RequestParam(defaultValue="10") int pageSize,
       @RequestParam(defaultValue="no") String keyword,
       @RequestParam(defaultValue="desc") String align,
+      Restaurant restaurant,
       HttpServletRequest request, HttpServletResponse response) 
           throws Exception {
 
+    restaurant.setCalcstar(calcStar(restaurant.getStar(), restaurant.getCountstar()));
+    
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (pageNo - 1) * pageSize);
     paramMap.put("length", pageSize);
     paramMap.put("keyword", keyword);
     paramMap.put("align", align);
-
+    paramMap.put("calcstar", restaurant.getCalcstar());
+    
+    restaurantDao.updateStar();
     List<Restaurant> restaurants = restaurantDao.selectList(paramMap);
-
     request.setAttribute("restaurants", restaurants);
 
     return "restaurant/RestaurantList";
@@ -127,13 +131,44 @@ public class RestaurantController {
   
   @RequestMapping("search")
   public String search(
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="10") int pageSize,
+      @RequestParam(defaultValue="no") String keyword,
+      @RequestParam(defaultValue="desc") String align,
       String word,
       HttpServletRequest request) throws Exception {
     
-    List<Restaurant> findRestaurants = restaurantDao.searchList(word);
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("startIndex", (pageNo - 1) * pageSize);
+    paramMap.put("length", pageSize);
+    paramMap.put("keyword", keyword);
+    paramMap.put("align", align);
+    paramMap.put("word", word);
+    List<Restaurant> findRestaurants = restaurantDao.searchList(paramMap);
 
     request.setAttribute("findRestaurants", findRestaurants);
     return "restaurant/FindRestaurantList";
   }
+  
+  
+  @RequestMapping(value="plusStar", method=RequestMethod.POST)
+  public String plusStar(
+      Restaurant restaurant,
+      Model model) throws Exception {
+    
+    if (restaurantDao.plusStar(restaurant) <= 0) {
+      model.addAttribute("errorCode", "401");
+      return "restaurant/RestaurantAuthError";
+    } 
+    return "redirect:list.do";
+  }
+  private int calcStar(int star, int countstar) {
+    if (countstar == 0) {
+     return 0; 
+    }
+    return star / countstar;
+  }
+
+  
   
 }

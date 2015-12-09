@@ -5,6 +5,7 @@
 <head>
   <meta charset='UTF-8'>
   <title>새 맛집 등록</title>
+  <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
 <h1>새 맛집 등록</h1>
