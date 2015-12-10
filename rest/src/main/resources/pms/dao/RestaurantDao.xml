@@ -95,17 +95,15 @@
     from restaurant
     where 
     <choose>
-      <when test="keyword == 'name'">name </when>
-      <when test="keyword == 'no'">no </when>
-      <otherwise>floatstar </otherwise>
+      <when test="word == 'content'">content </when>
+      <otherwise>name </otherwise>
     </choose>
     like concat('%',#{word},'%')
     order by 
     <choose>
       <when test="keyword == 'name'">name </when>
-      <when test="keyword == 'floatstar'">floatstar </when>
       <when test="keyword == 'no'">no </when>
-      <otherwise>rank </otherwise>
+      <otherwise>floatstar </otherwise>
     </choose>
     <choose>
       <when test="align == 'asc'">asc</when>

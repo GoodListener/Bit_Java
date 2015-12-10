@@ -8,39 +8,54 @@
 <html>
 <head>
   <meta charset='UTF-8'>
-  <title>맛집-수정하기</title>
+  <title>맛집-수정하기</title> 
   <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
-<div class="align-center vi">
-<h1>맛집 게시물 수정하기</h1>
-</div>
+  <jsp:include page="/Header.jsp" />
 <div style="margin-left: 530px;" >
-<a href='list.do'>목록</a>
 </div>
 <div align="center">
 <c:if test="${not empty restaurant}">
+
 <form id='form1' action='update.do' method='post' enctype="multipart/form-data">
-<table class="type01">
+
+<table style="margin-left: auto; margin-right: auto; border-style: none">
+    <tr>
+       <td style="align:left;">
+         <p>
+           <a class="button" href="list.do">List</a>
+             <button name='update.do' type='submit' class='button'>Update</button>
+             <a class='button' href='delete.do?no=${restaurant.no}'>Delete</a>
+         </p>
+       </td>
+      </tr>
+    <tr>
+    <th style="text-align:left;font-size:30px;font-weight:bold;">맛집 게시물 수정하기</th>
+    </tr>
+ </table>
+<table class="type01" style="margin-left: auto; margin-right: auto; border-style: none">
+  <tr>
+  </tr>
 <tr>
-  <th>번호</th>
+  <th bgcolor="#FAED7D">번호</th>
   <td><input type='text' name='no' value='${restaurant.no}' readonly></td>
 </tr>
 <tr>
-  <th>상호명</th>
+  <th bgcolor="#FAED7D">상호명</th>
   <td><input type='text' name='name' value='${restaurant.name}'></td>
 </tr>
 <tr>
-  <th>장소</th>
+  <th bgcolor="#FAED7D">장소</th>
   <td><input type='text' name='location' value='${restaurant.location}'></td>
 </tr>
 <tr>
-  <th>내용</th>
+  <th bgcolor="#FAED7D">내용</th>
   <td><textarea rows='10' name='content' 
       cols='60'>${restaurant.content}</textarea></td>
 </tr>
 <tr>
-  <th>사진</th>
+  <th bgcolor="#FAED7D">사진</th>
   <td>
   <c:choose>
   <c:when test="${empty restaurant.photo }">
@@ -56,10 +71,7 @@
   </td>
 </tr>
 </table>
-<p>
-<button name='update.do' type='submit' class='button1'>변경</button>
-<a href='delete.do?no=${restaurant.no}'><button type="button">삭제</button></a>
-</p>
+
 </form>
 </c:if>
 </div>

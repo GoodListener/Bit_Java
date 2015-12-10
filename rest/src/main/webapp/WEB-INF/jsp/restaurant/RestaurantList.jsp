@@ -37,7 +37,21 @@
 <c:forEach var="restaurant" items="${restaurants}">
 
 			<tr>
-				<td>${restaurant.rank}</td>
+			  
+				<td>
+				<c:choose>
+				  <c:when test="${(restaurant.rank == 1)}">
+				    <img width="25" height="40" src="../file/1.png">
+				  </c:when>
+				  <c:when test="${(restaurant.rank == 2)}">
+            <img width="25" height="40" src="../file/2.png">
+          </c:when>
+          <c:when test="${(restaurant.rank == 3)}">
+            <img width="25" height="40" src="../file/3.png">
+          </c:when>
+				  <c:otherwise>${restaurant.rank }</c:otherwise>
+				</c:choose>
+				</td>
 				<td><img width="60" height="60"
 					src='../file/${(empty restaurant.photo)?"default.png":restaurant.photo}'>
 			  </td>
