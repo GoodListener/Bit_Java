@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+#adminUl{ 
+  list-style-type: none;
+  display:inline;
+  float: left;
+  margin-right: 0px;
+}
+
+#indexul{
+  list-style-type: none;
+  display:inline;
+  float: left;
+  margin-left: 20px;  
+}
+
+#adminUl3{
+  list-style-type: none;
+  width: 250px;
+}
+
+#procButton{
+  margin-left: 200px;
+}
+
+#boxfloat{
+  width: 80px;
+  float: left;
+}

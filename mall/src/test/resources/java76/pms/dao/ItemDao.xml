@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java76.pms.dao.ItemDao">
+  <resultMap type="item" id="itemMap">
+    <id column="pno" property="no"/>
+  </resultMap>  
+	<sql id="select_inc">
+		select pno, product, sort, price, amount, brand, photo, content
+	</sql>
+	
+	<select id="selectList" resultMap="itemMap" parameterType="map">
+		<include refid="select_inc"/> 
+		from item
+		order by
+		<choose>
+      <when test="keyword == 'product'"> product </when>
+      <when test="keyword == 'sort'"> sort </when>
+      <otherwise> pno </otherwise>
+    </choose>
+    <choose>
+      <when test="align == 'desc'">desc</when>
+      <otherwise>asc</otherwise>
+    </choose>
+		limit #{startIndex}, #{length}
+	</select>
+
+	<insert id="insert" parameterType="item">
+		insert into item(product,sort,price,amount,brand,photo,content)
+		values(#{product},#{sort},#{price},#{amount},#{brand},#{photo},#{content})
+	</insert>
+
+	<delete id="delete" parameterType="map">
+		delete from item where pno=#{value}
+	</delete>
+
+	<update id="update" parameterType="item">
+		update item set
+		product=#{product},
+		sort=#{sort},
+		price=#{price},
+		amount=#{amount},
+		brand=#{brand},
+		photo=#{photo},
+		content=#{content}
+		where pno=#{no}
+	</update>
+	
+	<select id="selectOne" resultMap="itemMap" parameterType="int">
+		<include refid="select_inc"/>
+		from item
+		where pno=#{no}
+	</select>
+	
+</mapper>
+
+
+
+
+

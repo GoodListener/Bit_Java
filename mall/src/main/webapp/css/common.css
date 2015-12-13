@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+.menu {
+  position:absolute;
+  top: 150px;
+  left: 280px;
+  width:1200px;
+  height:auto;
+  background-color: #f5f3fd;
+}
+
+.contents {
+  width:auto;
+  height:auto;
+}
