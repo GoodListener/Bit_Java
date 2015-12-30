@@ -54,6 +54,32 @@
 		where pno=#{no}
 	</select>
 	
+	<select id="searchPrice" resultMap="itemMap" parameterType="map">
+    <include refid="select_inc"/> 
+    from item
+    where
+    <choose>
+      <when test="priceOption == 'price0'"> price &lt; 10000 </when>
+      <when test="priceOption == 'price10000'"> (price >= 10000) AND (price &lt; 50000) </when>
+      <when test="priceOption == 'price50000'"> (price >= 50000) AND (price &lt; 100000) </when>
+      <when test="priceOption == 'price100000'"> (price >= 100000) AND (price &lt; 200000) </when>
+      <when test="priceOption == 'price200000'"> (price >= 200000)</when>
+      <otherwise>price &gt; 0</otherwise>
+    </choose>
+    order by
+    <choose>
+      <when test="keyword == 'product'"> product </when>
+      <when test="keyword == 'sort'"> sort </when>
+      <otherwise> pno </otherwise>
+    </choose>
+    <choose>
+      <when test="align == 'desc'">desc</when>
+      <otherwise>asc</otherwise>
+    </choose>
+    limit #{startIndex}, #{length}
+  </select>
+
+	
 </mapper>
 
 

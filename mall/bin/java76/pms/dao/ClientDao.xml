@@ -7,6 +7,7 @@ namespace: SQL문을 분류하는 용도로 사용하는 그룹명.
            프로그래밍의 일관성을 위해서 가능한 DAO의 패키지명과 같게 하라!
  -->
 <mapper namespace="java76.pms.dao.ClientDao">
+
   <!-- 컬럼 이름과 프로퍼티 이름이 다를 때, 연결 정보를 정의해두면 select할 때 편리하다. -->
   <resultMap type="client" id="clientMap">
   </resultMap>
@@ -41,7 +42,7 @@ namespace: SQL문을 분류하는 용도로 사용하는 그룹명.
   
   <insert id="insert" parameterType="client">
     insert into client(name,age,address,tel,id,password) 
-    values(#{name},#{age},#{address},#{tel},#{id},#{password})
+    values(#{name},#{age},#{address},#{tel},#{id},sha1(#{password}))
   </insert>
   
   <delete id="delete" parameterType="String">
@@ -69,9 +70,15 @@ namespace: SQL문을 분류하는 용도로 사용하는 그룹명.
     where id=#{id}
   </select>
   
-  <select id="login" resultType="item" parameterType="map">
-    select name, age, address, tel
-    from student
+  <select id="login" resultType="client" parameterType="map">
+    select 
+    name,
+    age, 
+    address, 
+    tel,
+    id,
+    password
+    from client
     where id=#{id} and password=sha1(#{password})
   </select>
 </mapper>

@@ -88,6 +88,12 @@ color:#0fa0dd;
 .prod_details_tab{
 
 }
+#price_option {
+ position:absolute;
+ right:0;
+
+}
+
 </style>
 </head>
 <body>
@@ -96,49 +102,60 @@ color:#0fa0dd;
 <%-- <jsp:include page="/Header.jsp"></jsp:include> --%>
 
 
-<div class="menu">
-    <section class="contents">
-<c:if test="${not empty loginUser}">
-<c:if test="${loginUser.id eq 'admin'}">
-<a href='add.do'>새 상품 등록</a><br>
-</c:if>
-</c:if>
-<c:forEach var="item" items="${items}">    
-  <div class="col-2">
-      
-       <div class="prod_box">
-      <!--  <div class="top_prod_box"></div>
+	<div class="menu">
+		<form action="searchPrice.do" method="POST">
+		<div id="price_option">
+			가격 분류<select name="priceOption">
+				<option value="">가격 설정</option>
+				<option value="price0">10000원 미만</option>
+				<option value="price10000">10000원 ~ 49999원</option>
+				<option value="price50000">50000원 ~ 99999원</option>
+				<option value="price100000">100000원 ~ 199999원</option>
+				<option value="price200000">20만원 이상</option>
+			</select>
+			<button>선택</button>
+		</div>
+			</form>
+
+		<section class="contents">
+			<c:if test="${not empty loginUser}">
+				<c:if test="${loginUser.id eq 'admin'}">
+					<a href='add.do'>새 상품 등록</a>
+					<br>
+				</c:if>
+			</c:if>
+
+			<c:forEach var="item" items="${items}">
+				<div class="col-2">
+
+					<div class="prod_box">
+						<!--  <div class="top_prod_box"></div>
       <div class="center_prod_box"> -->
-      <img src='../file/${item.photo }' id="prod_img">
-       </div>
-      <div class="prod_explain">${item.product }</div>
-      <div class="prod_price"> ${item.price }</div>
-      
-      
-      <div class="prod_details_tab"> 
-      
-      <a href="#">
-      <img src="../images/cart.gif" alt="" border="0" class="left_bt" />
-      </a> 
-      
-      <a href="#">
-      <img src="../images/favs.gif" alt="" border="0" class="left_bt" />
-      </a> 
-      
-      <a href="#">
-      <img src="../images/favorites.gif" alt="" border="0" class="left_bt" />
-      </a> 
-      
-      <a href="detail.do?no=${item.no}" class="prod_details">details</a> 
-      </div>
-      
-    </div> 
-</c:forEach> 
-</section>
+						<img src='../file/${item.photo }' width="130" height="200"
+							id="prod_img">
+					</div>
+					<div class="prod_explain">${item.product }</div>
+					<div class="prod_price">${item.price }</div>
 
 
-  </div>
-<%-- <jsp:include page="/Copyright.jsp"/> --%>
+					<div class="prod_details_tab">
+
+						<a href="#"> <img src="../images/cart.gif" alt="" border="0"
+							class="left_bt" />
+						</a> <a href="#"> <img src="../images/favs.gif" alt="" border="0"
+							class="left_bt" />
+						</a> <a href="#"> <img src="../images/favorites.gif" alt=""
+							border="0" class="left_bt" />
+						</a> <a href="detail.do?no=${item.no}" class="prod_details">details</a>
+					</div>
+
+				</div>
+			</c:forEach>
+		</section>
+
+
+	</div>
+	<%-- <jsp:include page="/Copyright.jsp"/> --%>
 
 </body>
 </html>    

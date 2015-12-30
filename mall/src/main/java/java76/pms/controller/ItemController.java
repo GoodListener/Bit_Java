@@ -122,6 +122,33 @@ public class ItemController {
     return "redirect:list.do";
   }
   
+  
+  
+  @RequestMapping("searchPrice")
+  public String searchPrice(
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="10") int pageSize,
+      @RequestParam(defaultValue="no") String keyword,
+      @RequestParam(defaultValue="asc") String align,
+      String priceOption,
+        HttpServletRequest request) throws Exception {
+
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("startIndex", (pageNo - 1) * pageSize);
+    paramMap.put("length", pageSize);
+    paramMap.put("keyword", keyword);
+    paramMap.put("align", align);
+    paramMap.put("priceOption", priceOption);
+    
+    List<Item> items = itemDao.searchPrice(paramMap);
+
+    request.setAttribute("items", items);
+
+    return "item/ItemList";
+
+  }
+  
+  
   private void makeThumbnailImage(String originPath, String thumbPath) 
       throws IOException {
     Thumbnails.of(new File(originPath))

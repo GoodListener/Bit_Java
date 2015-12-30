@@ -15,4 +15,7 @@ public interface ItemDao {
   int update(Item item);
 
   Item selectOne(int no); 
+  
+  List<Item> searchPrice(Map<String,Object> paramMap);
+  
 }
